@@ -1,0 +1,15 @@
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: hoitcs-lab
+spec:
+  acme:
+    email: afaleye@gmail.com
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: hoitcs-lab-cluster-issuer
+    solvers:
+      - http01:
+          ingress:
+            ingressClassName: external-nginx

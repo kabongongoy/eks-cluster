@@ -1,0 +1,25 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: myapp
+  namespace: ingress-tls
+  annotations:
+    cert-manager.io/cluster-issuer: hoitcs-lab
+spec:
+  ingressClassName: external-nginx
+  rules:
+    - host: lab.hoitcs.com.au
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: myapp
+                port:
+                  number: 8080
+  tls:
+    - hosts:
+        - lab.hoitcs.com.au
+      secretName: lab.hoitcs.com.au
